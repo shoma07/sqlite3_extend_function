@@ -6,7 +6,7 @@ module SQLite3ExtendFunctions
     class Railtie < ::Rails::Railtie
       initializer 'sqlite3_functions' do
         ActiveRecord::ConnectionAdapters::AbstractAdapter.set_callback(
-          :checkout, :before, -> (conn) {
+          :checkout, :before, lambda { |conn|
             return if conn.adapter_name != 'SQLite'
 
             conn.raw_connection.create_function('ceil', 1) do |func, value|

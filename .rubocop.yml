@@ -1,0 +1,13 @@
+AllCops:
+  TargetRubyVersion: 2.6.5
+  Exclude:
+    - sqlite3_extend_functions.gemspec
+    - vendor/bundle/**/*
+    - vendor/bundler/**/*
+    - spec/dummy/**/*
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+Metrics/LineLength:
+  Max: 80
+  IgnoredPatterns: ['(\A|\s+)#']

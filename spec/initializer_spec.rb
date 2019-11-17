@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe SQLite3ExtendFunctions do
-
   describe 'ceil' do
     let(:val) { 0.01 }
     subject do
@@ -22,7 +21,7 @@ RSpec.describe SQLite3ExtendFunctions do
       end
     end
     context 'value is null' do
-      let(:val) { "null" }
+      let(:val) { 'null' }
       it 'is nil' do
         is_expected.to be_nil
       end
@@ -49,11 +48,11 @@ RSpec.describe SQLite3ExtendFunctions do
     context 'value is -0.01' do
       let(:val) { -0.01 }
       it 'is -1' do
-        is_expected.to eq -1
+        is_expected.to eq(-1)
       end
     end
     context 'value is null' do
-      let(:val) { "null" }
+      let(:val) { 'null' }
       it 'is nil' do
         is_expected.to be_nil
       end
