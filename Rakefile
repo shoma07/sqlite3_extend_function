@@ -8,10 +8,14 @@ require 'rdoc/task'
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Sqlite3Functions'
+  rdoc.title    = 'SQLite3ExtendFunctions'
   rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.md')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+task default: :spec
 
 require 'bundler/gem_tasks'
