@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ["shoma07"]
   spec.email       = ["23730734+shoma07@users.noreply.github.com"]
   spec.homepage    = "https://github.com/shoma07/sqlite3_extend_functions"
-  spec.summary     = "Summary of SQLite3ExtendFunctions."
-  spec.description = "Description of SQLite3ExtendFunctions."
+  spec.summary     = "Add some user-defined functions to SQL when using SQLie3 with Rails."
+  spec.description = "Add some user-defined functions to SQL when using SQLie3 with Rails."
   spec.license     = "MIT"
 
   spec.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
