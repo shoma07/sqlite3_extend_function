@@ -15,6 +15,10 @@ Gem::Specification.new do |spec|
   spec.description = "Add some user-defined functions to SQL when using SQLie3 with Rails."
   spec.license     = "MIT"
 
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
+
   spec.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency 'activerecord', '>= 5'
