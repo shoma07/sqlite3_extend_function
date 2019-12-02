@@ -1,10 +1,15 @@
-.bundle/
-log/*.log
-pkg/
-spec/dummy/db/*.sqlite3
-spec/dummy/db/*.sqlite3-journal
-spec/dummy/db/*.sqlite3-*
-spec/dummy/log/*.log
-spec/dummy/storage/
-spec/dummy/tmp/
-vendor/
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/vendor
+.DS_Store
+Gemfile.lock
+.rspec
+
+# rspec failure tracking
+.rspec_status

@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe SQLite3ExtendFunctions do
+RSpec.describe SQLite3ExtendFunction do
+  before(:all) do
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: ':memory:'
+    )
+  end
+
   describe 'ceil' do
     let(:val) { 0.01 }
     subject do

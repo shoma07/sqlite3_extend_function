@@ -1,6 +1,6 @@
-# SQLite3ExtendFunctions
+# SQLite3ExtendFunction
 
-Add some user-defined functions to SQL when using SQLie3 with Rails.
+Add some user-defined function to SQL when using SQLie3 with ActiveRecord.
 
 ## Functions
 
@@ -19,9 +19,7 @@ ActiveRecord::Base.connection.select_one("select floor(1.1)")
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sqlite3_extend_functions',
-    git: 'https://github.com/shoma07/sqlite3_extend_functions.git',
-    branch: 'master'
+gem 'sqlite3_extend_function', '~> 0.1'
 ```
 
 And then execute:
