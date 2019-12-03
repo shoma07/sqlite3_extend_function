@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require 'active_record'
+require 'sqlite3'
 require 'sqlite3_extend_function/version'
 require 'sqlite3_extend_function/function'
-require 'sqlite3_extend_function/configuration'
 
 # SQLite3ExtendFunction
 module SQLite3ExtendFunction
-  extend Configuration
-
-  def self.included(klass)
-    klass.set_callback(:checkout, :before, lambda { |conn|
-      return if conn.adapter_name != 'SQLite'
-
-      SQLite3ExtendFunction.options[:functions].each do |func|
-        lmd = Function.send(func)
-        args = lmd.parameters.size - 1
-        conn.raw_connection.create_function(func.to_s, args, &lmd)
+  def self.included(base)
+    base.class_eval do
+      original_method = instance_method(:initialize)
+      define_method(:initialize) do |*args, &block|
+        result = original_method.bind(self).call(*args)
+        SQLite3ExtendFunction::Function.singleton_methods.each do |func|
+          lmd = Function.send(func)
+          create_function(func.to_s, (lmd.parameters.size - 1), &lmd)
+        end
+        block.call(self) unless block.nil?
+        result
       end
-    })
+    end
   end
 end
 
-ActiveRecord::ConnectionAdapters::AbstractAdapter.include(SQLite3ExtendFunction)
+SQLite3::Database.include(SQLite3ExtendFunction)

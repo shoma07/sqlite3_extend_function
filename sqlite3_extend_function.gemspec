@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.email       = ["23730734+shoma07@users.noreply.github.com"]
   spec.homepage    = "https://github.com/shoma07/sqlite3_extend_function"
   spec.required_ruby_version = ">= 2"
-  spec.summary     = "Add some user-defined functions to SQL when using SQLie3 with Rails."
-  spec.description = "Add some user-defined functions to SQL when using SQLie3 with Rails."
+  spec.summary     = "Add some user-defined functions to SQL when using SQLie3."
+  spec.description = "Add some user-defined functions to SQL when using SQLie3."
   spec.license     = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -21,8 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency 'activerecord', '>= 5'
+  spec.add_dependency "sqlite3", ">= 1.3"
 
-  spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "rspec"
 end

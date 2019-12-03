@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'active_record'
+require 'sqlite3'
 require 'sqlite3_extend_function'
 
 # Dir[File.expand_path('support/*.rb', __dir__)].each { |f| require f }
