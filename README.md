@@ -1,18 +1,38 @@
 # SQLite3ExtendFunction
 
-Add some user-defined function to SQL when using SQLie3 with ActiveRecord.
+Add some user-defined function to SQL when using SQLie3.
 
 ## Functions
 
+The following PostgreSQL functions are supported.
+
+- cbrt
 - ceil
+- degrees
+- div
+- exp
 - floor
+- ln
+- log
+- mod
+- pi
+- power
+- radians
+- sign
+- sqrt
+- trunc
+
+See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions-math.html#FUNCTIONS-MATH-FUNC-TABLE)
 
 ```
-ActiveRecord::Base.connection.select_one("select ceil(0.1)")
-=> {"ceil(0.1)"=>1}
+# check
+db = SQLite3::Database.new(':memory:')
 
-ActiveRecord::Base.connection.select_one("select floor(1.1)")
-=> {"floor(1.1)"=>1}
+db.execute("select ceil(0.1)")[0][0]
+=> 1
+
+db.execute("select floor(1.1)")[0][0]
+=> 1
 ```
 
 ## Installation

@@ -15,7 +15,9 @@ module SQLite3ExtendFunction
           lmd = Function.send(func)
           create_function(func.to_s, (lmd.parameters.size - 1), &lmd)
         end
-        block.call(self) unless block.nil?
+        # frozen_string_literal: true
+        # SQLite3ExtendFunction
+        block&.call(self)
         result
       end
     end
