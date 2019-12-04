@@ -6,23 +6,46 @@ Add some user-defined function to SQL when using SQLie3.
 
 The following PostgreSQL functions are supported.
 
+- acos
+- ascii
+- asin
+- atan
+- atan2
+- bit\_length
+- btrim
 - cbrt
 - ceil
+- char\_length
+- chr
+- concat
+- concat\_ws
+- cos
+- cot
+- decode
 - degrees
 - div
+- encode
 - exp
 - floor
+- format
+- initcap
 - ln
 - log
+- md5
 - mod
+- now
+- octet\_length
 - pi
 - power
 - radians
 - sign
+- sin
 - sqrt
+- tan
 - trunc
+- width\_bucket
 
-See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions-math.html#FUNCTIONS-MATH-FUNC-TABLE)
+See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions.html)
 
 ```
 # check

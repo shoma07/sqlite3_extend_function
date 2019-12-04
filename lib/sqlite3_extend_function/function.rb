@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'bigdecimal'
+require 'base64'
+require 'digest/md5'
 module SQLite3ExtendFunction
   # SQLite3ExtendFunction::Function
   module Function
@@ -239,6 +241,323 @@ module SQLite3ExtendFunction
             raise SQLite3::SQLException,
                   'invalid input syntax for type double precision'
           end
+        end
+      end
+
+      # return the bucket number to which operand would be assigned input
+      # a histogram having count equal-width buckets spanning the range b1 to b2;
+      # returns 0 or count+1 for an input outside the range
+      # @return [Proc]
+      def width_bucket
+        lambda do |func, operand, b1, b2, count|
+          begin
+            operand = Kernel.Float(operand)
+            b1 = Kernel.Float(b1)
+            b2 = Kernel.Float(b2)
+            count = Kernel.Float(count)
+
+            raise ArgumentError unless count.positive?
+            result = (operand / ((b2 - b1) / count)).ceil
+            result = count + 1 if result > count
+            result = 0 if result.negative?
+            func.result = result.to_i
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  'ArgumentError'
+          end
+        end
+      end
+
+      # @return [Proc]
+      def acos
+        lambda do |func, x|
+          begin
+            func.result = Math.acos(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def asin
+        lambda do |func, x|
+          begin
+            func.result = Math.asin(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def atan
+        lambda do |func, x|
+          begin
+            func.result = Math.atan(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def atan2
+        lambda do |func, y, x|
+          begin
+            func.result = Math.atan2(Kernel.Float(y), Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def cos
+        lambda do |func, x|
+          begin
+            func.result = Math.cos(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def cot
+        lambda do |func, x|
+          begin
+            func.result = 1 / Math.tan(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def sin
+        lambda do |func, x|
+          begin
+            func.result = Math.sin(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # @return [Proc]
+      def tan
+        lambda do |func, x|
+          begin
+            func.result = Math.tan(Kernel.Float(x))
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                  "invalid input syntax for type double precision: #{x}"
+          end
+        end
+      end
+
+      # Number of bits in string
+      # @return [Proc]
+      def bit_length
+        lambda do |func, str|
+          begin
+            func.result = str.bytesize * 8
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # Number of characters in string
+      # @return [Proc]
+      def char_length
+        lambda do |func, str|
+          begin
+            func.result = str.length
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # octet_length
+      # @return [Proc]
+      def octet_length
+        lambda do |func, str|
+          begin
+            func.result = str.bytesize
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def ascii
+        lambda do |func, str|
+          begin
+            raise ArgumentError if str.is_a? String
+
+            func.result = str.ord
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def btrim
+        lambda do |func, text, chrs = ''|
+          begin
+            func.result = text.sub(/\A[#{chrs}]*/, '').sub(/[#{chrs}]*\z/, '')
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def chr
+        lambda do |func, int|
+          begin
+            func.result = int.chr
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def concat
+        lambda do |func, *args|
+          begin
+            func.result = args.compact.join
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def concat_ws
+        lambda do |func, sep, *args|
+          begin
+            func.result = args.compact.join(sep)
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def decode
+        lambda do |func, str, format|
+          return if data.nil?
+
+          begin
+            raise ArgumentError if data.is_a? String
+
+            func.result = case format
+                          when 'base64'
+                            Base64.decode64(str)
+                          when 'hex'
+                            str.scan(/.{2}/).map(&:hex).map(&:chr).join
+                          when 'escape'
+                            raise ArgumentError
+                          else
+                            raise ArgumentError
+                          end
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def encode
+        lambda do |func, data, format|
+          return if data.nil?
+
+          begin
+            raise ArgumentError if data.is_a? String
+
+            func.result = case format
+                          when 'base64'
+                            Base64.encode64(data)
+                          when 'hex'
+                            data.unpack("C*").map { |c| c.to_s(16) }.join
+                          when 'escape'
+                            raise ArgumentError
+                          else
+                            raise ArgumentError
+                          end
+          rescue ArgumentError
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def format
+        lambda do |func, formartstr, *args|
+          func.result = formartstr % args
+        end
+      end
+
+      # @return [Proc]
+      def initcap
+        lambda do |func, str|
+          return if str.nil?
+
+          begin
+            regexp = /([a-zA-Z0-9]*|[^a-zA-Z0-9]*)/
+            func.result = str.split(regexp).map.with_index { |s, i|
+              i.odd? ? s.downcase.capitalize : s
+            }.join
+          rescue
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # @return [Proc]
+      def md5
+        lambda do |func, str|
+          return if str.nil?
+
+          begin
+            func.result = Digest::MD5.hexdigest(str)
+          rescue
+            raise SQLite3::SQLException,
+                 "No function matches the given name and argument types. You might need to add explicit type casts."
+          end
+        end
+      end
+
+      # Current date and time (start of current transaction)
+      # @return [Proc]
+      def now
+        lambda do |func|
+          func.result = Time.now.strftime('%Y-%m-%d %H:%M:%S.%6N%:z')
         end
       end
     end
