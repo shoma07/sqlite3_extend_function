@@ -1,6 +1,6 @@
 # SQLite3ExtendFunction
 
-Add some user-defined function to SQL when using SQLie3.
+Add some user-defined function to SQL when using SQLite3.
 
 ## Functions
 
@@ -47,8 +47,9 @@ The following PostgreSQL functions are supported.
 
 See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions.html)
 
-```
+```ruby
 # check
+SQLite3::Database.include(SQLite3ExtendFunction)
 db = SQLite3::Database.new(':memory:')
 
 db.execute("select ceil(0.1)")[0][0]
@@ -74,6 +75,34 @@ And then execute:
 ```bash
 $ bundle
 ```
+
+## Enable extend functions
+
+```ruby
+SQLite3::Database.include(SQLite3ExtendFunction)
+```
+
+## Add extend function
+
+Extend function can be added by defining modules such as:
+
+```ruby
+module SQLite3ExtendFunction
+  module Functions
+    module FunctionName
+      class << self
+        def call(arg1)
+          # ...
+        rescue StandardError
+          raise SQLite3::SQLException, 'error message'
+        end
+      end
+    end
+  end
+end
+```
+
+Extend function name is "FunctionName" as the snake case.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
