@@ -63,7 +63,7 @@ db.execute("select floor(1.1)")[0][0]
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sqlite3_extend_function', '~> 0.2'
+gem 'sqlite3_extend_function', '~> 0.3'
 
 # master branch
 gem 'sqlite3_extend_function',
