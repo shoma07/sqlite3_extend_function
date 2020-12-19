@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Md5
     module Md5
       class << self
-        # @return [String]
-        def name
-          'md5'
-        end
-
         # @return [void]
         def call(func, str)
           return if str.nil?

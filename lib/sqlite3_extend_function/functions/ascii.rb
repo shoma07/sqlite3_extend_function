@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::Ascii
     module Ascii
       class << self
-        # @return [String]
-        def name
-          'ascii'
-        end
-
         # @return [void]
         def call(func, str)
           func.result = str.is_a?(String) ? (raise ArgumentError) : str.ord

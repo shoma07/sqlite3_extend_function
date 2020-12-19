@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Mod
+    # SQLite3ExtendFunction::Functions::OctetLength
     module OctetLength
       class << self
-        # @return [String]
-        def name
-          'octet_length'
-        end
-
         # @return [void]
         def call(func, str)
           func.result = str.bytesize

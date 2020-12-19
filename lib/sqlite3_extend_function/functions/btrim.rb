@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::Btrim
     module Btrim
       class << self
-        # @return [String]
-        def name
-          'btrim'
-        end
-
         # @return [void]
         def call(func, text, chrs = '')
           func.result = text.sub(/\A[#{chrs}]*/, '').sub(/[#{chrs}]*\z/, '')

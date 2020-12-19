@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Concat
     module Concat
       class << self
-        # @return [String]
-        def name
-          'concat'
-        end
-
         # @return [void]
         def call(func, *args)
           func.result = args.compact.join

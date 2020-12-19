@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Radians
+    # SQLite3ExtendFunction::Functions::Trunc
     module Trunc
       class << self
-        # @return [String]
-        def name
-          'trunc'
-        end
-
         # @return [void]
         def call(func, dp, s = 0)
           return if dp.nil?

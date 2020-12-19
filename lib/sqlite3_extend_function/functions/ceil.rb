@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Ceil
     module Ceil
       class << self
-        # @return [String]
-        def name
-          'ceil'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

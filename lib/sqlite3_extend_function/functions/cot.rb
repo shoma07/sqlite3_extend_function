@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Ceil
+    # SQLite3ExtendFunction::Functions::Cot
     module Cot
       class << self
-        # @return [String]
-        def name
-          'cot'
-        end
-
         # @return [void]
         def call(func, x)
           func.result = 1 / Math.tan(Float(x))

@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::Acos
     module Acos
       class << self
-        # @return [String]
-        def name
-          'acos'
-        end
-
         # @return [void]
         def call(func, x)
           func.result = Math.acos(Float(x))

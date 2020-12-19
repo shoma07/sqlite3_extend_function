@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Radians
+    # SQLite3ExtendFunction::Functions::Sqrt
     module Sqrt
       class << self
-        # @return [String]
-        def name
-          'sqrt'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

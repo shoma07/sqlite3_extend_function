@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Ceil
+    # SQLite3ExtendFunction::Functions::Cos
     module Cos
       class << self
-        # @return [String]
-        def name
-          'cos'
-        end
-
         # @return [void]
         def call(func, x)
           func.result = Math.cos(Float(x))

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Cbrt
     module Cbrt
       class << self
-        # @return [String]
-        def name
-          'cbrt'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

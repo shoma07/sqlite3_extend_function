@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Radians
+    # SQLite3ExtendFunction::Functions::WidthBucket
     module WidthBucket
       class << self
-        # @return [String]
-        def name
-          'width_bucket'
-        end
-
         # @return [void]
         def call(func, operand, b1, b2, count)
           count = Float(count)

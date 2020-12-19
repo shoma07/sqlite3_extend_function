@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Initcap
     module Initcap
       class << self
-        # @return [String]
-        def name
-          'initcap'
-        end
-
         # @return [void]
         def call(func, str)
           return if str.nil?

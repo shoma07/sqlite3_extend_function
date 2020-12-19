@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::Asin
     module Asin
       class << self
-        # @return [String]
-        def name
-          'asin'
-        end
-
         # @return [void]
         def call(func, x)
           func.result = Math.asin(Float(x))

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Decode
     module Decode
       class << self
-        # @return [String]
-        def name
-          'decode'
-        end
-
         # @return [void]
         def call(func, data, format)
           return if data.nil?

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Radians
     module Radians
       class << self
-        # @return [String]
-        def name
-          'radians'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

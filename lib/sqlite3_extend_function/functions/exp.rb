@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Exp
     module Exp
       class << self
-        # @return [String]
-        def name
-          'exp'
-        end
-
         # @return [void]
         def call(func, _y, _x)
           return if dp.nil?

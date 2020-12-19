@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::Atan2
     module Atan2
       class << self
-        # @return [String]
-        def name
-          'atan2'
-        end
-
         # @return [void]
         def call(func, y, x)
           func.result = Math.atan2(Float(y), Float(x))

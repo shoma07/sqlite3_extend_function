@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Log
     module Log
       class << self
-        # @return [String]
-        def name
-          'log'
-        end
-
         # @return [void]
         def call(func, y, x = nil)
           return if y.nil?

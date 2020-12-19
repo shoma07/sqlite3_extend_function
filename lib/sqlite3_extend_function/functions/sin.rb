@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Radians
+    # SQLite3ExtendFunction::Functions::Sin
     module Sin
       class << self
-        # @return [String]
-        def name
-          'sin'
-        end
-
         # @return [void]
         def call(func, x)
           func.result = Math.sin(Float(x))

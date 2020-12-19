@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Power
     module Power
       class << self
-        # @return [String]
-        def name
-          'power'
-        end
-
         # @return [void]
         def call(func, a, b)
           return if a.nil? || b.nil?

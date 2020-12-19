@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Ceil
+    # SQLite3ExtendFunction::Functions::CharLength
     module CharLength
       class << self
-        # @return [String]
-        def name
-          'char_length'
-        end
-
         # @return [void]
         def call(func, str)
           func.result = str.length

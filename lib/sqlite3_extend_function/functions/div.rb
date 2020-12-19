@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Div
     module Div
       class << self
-        # @return [String]
-        def name
-          'div'
-        end
-
         # @return [void]
         def call(func, y, x)
           return if y.nil? || x.nil?

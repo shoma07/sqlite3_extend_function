@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Floor
     module Floor
       class << self
-        # @return [String]
-        def name
-          'floor'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

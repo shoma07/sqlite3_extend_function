@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Ceil
+    # SQLite3ExtendFunction::Functions::Chr
     module Chr
       class << self
-        # @return [String]
-        def name
-          'chr'
-        end
-
         # @return [void]
         def call(func, int)
           func.result = int.chr

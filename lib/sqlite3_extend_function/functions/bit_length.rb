@@ -2,14 +2,9 @@
 
 module SQLite3ExtendFunction
   module Functions
-    # SQLite3ExtendFunction::Functions::Cbrt
+    # SQLite3ExtendFunction::Functions::BitLength
     module BitLength
       class << self
-        # @return [String]
-        def name
-          'bit_length'
-        end
-
         # @return [void]
         def call(func, str)
           func.result = str.bytesize * 8

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Mod
     module Mod
       class << self
-        # @return [String]
-        def name
-          'mod'
-        end
-
         # @return [void]
         def call(func, y, x = nil)
           func.result = Float(y).modulo(Float(x)).to_i

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Ln
     module Ln
       class << self
-        # @return [String]
-        def name
-          'ln'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Degrees
     module Degrees
       class << self
-        # @return [String]
-        def name
-          'degrees'
-        end
-
         # @return [void]
         def call(func, dp)
           return if dp.nil?

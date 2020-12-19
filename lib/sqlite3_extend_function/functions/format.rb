@@ -5,11 +5,6 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Format
     module Format
       class << self
-        # @return [String]
-        def name
-          'format'
-        end
-
         # @return [void]
         def call(func, formartstr, *args)
           func.result = formartstr % args
