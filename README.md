@@ -1,6 +1,6 @@
 # SQLite3ExtendFunction
 
-Add some user-defined function to SQL when using SQLie3.
+Add some user-defined function to SQL when using SQLite3.
 
 ## Functions
 
@@ -49,6 +49,7 @@ See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions.html)
 
 ```
 # check
+SQLite3::Database.include(SQLite3ExtendFunction)
 db = SQLite3::Database.new(':memory:')
 
 db.execute("select ceil(0.1)")[0][0]
@@ -73,6 +74,12 @@ gem 'sqlite3_extend_function',
 And then execute:
 ```bash
 $ bundle
+```
+
+## Include module
+
+```
+SQLite3::Database.include(SQLite3ExtendFunction)
 ```
 
 ## License
