@@ -47,7 +47,7 @@ The following PostgreSQL functions are supported.
 
 See [PostgreSQL Document](https://www.postgresql.org/docs/12/functions.html)
 
-```
+```ruby
 # check
 SQLite3::Database.include(SQLite3ExtendFunction)
 db = SQLite3::Database.new(':memory:')
@@ -78,7 +78,7 @@ $ bundle
 
 ## Include module
 
-```
+```ruby
 SQLite3::Database.include(SQLite3ExtendFunction)
 ```
 
