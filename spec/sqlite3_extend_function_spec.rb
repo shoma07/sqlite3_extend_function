@@ -3,98 +3,104 @@
 require 'spec_helper'
 
 RSpec.describe SQLite3ExtendFunction do
+  subject { db.execute(sql)[0][0] }
+
   let(:db) { SQLite3::Database.new(':memory:') }
 
-  describe 'ceil' do
-    let(:val) { 0.01 }
-    subject do
-      db.execute("select ceil(#{val})")[0][0]
+  describe 'acos' do
+    let(:sql) { "select acos(#{val})" }
+
+    context 'value is 0' do
+      let(:val) { 0 }
+
+      it { is_expected.to eq 1.5707963267948966 }
     end
+
+    context 'value is 1' do
+      let(:val) { 1 }
+
+      it { is_expected.to eq 0 }
+    end
+
+    context 'value is -1' do
+      let(:val) { -1 }
+
+      it { is_expected.to eq 3.141592653589793 }
+    end
+  end
+
+  describe 'ceil' do
+    let(:sql) { "select ceil(#{val})" }
+
     context 'value is 0.01' do
       let(:val) { 0.01 }
-      it 'is 1' do
-        is_expected.to eq 1
-      end
+
+      it { is_expected.to eq 1 }
     end
     context 'value is -0.01' do
       let(:val) { -0.01 }
-      it 'is 0' do
-        is_expected.to eq 0
-      end
+
+      it { is_expected.to eq 0 }
     end
     context 'value is null' do
       let(:val) { 'null' }
-      it 'is nil' do
-        is_expected.to be_nil
-      end
+
+      it { is_expected.to be_nil }
     end
     context 'value type is string' do
       let(:val) { "'STR'" }
-      it 'raise SQLite3::SQLException' do
-        expect { subject }.to raise_error SQLite3::SQLException
-      end
+
+      it { expect { subject }.to raise_error SQLite3::SQLException }
     end
   end
 
   describe 'floor' do
-    let(:val) { 0.01 }
-    subject do
-      db.execute("select floor(#{val})")[0][0]
-    end
+    let(:sql) { "select floor(#{val})" }
+
     context 'value is 0.01' do
       let(:val) { 0.01 }
-      it 'is 0' do
-        is_expected.to eq 0
-      end
+
+      it { is_expected.to eq 0 }
     end
     context 'value is -0.01' do
       let(:val) { -0.01 }
-      it 'is -1' do
-        is_expected.to eq(-1)
-      end
+
+      it { is_expected.to eq(-1) }
     end
     context 'value is null' do
       let(:val) { 'null' }
-      it 'is nil' do
-        is_expected.to be_nil
-      end
+
+      it { is_expected.to be_nil }
     end
     context 'value type is string' do
       let(:val) { "'STR'" }
-      it 'raise SQLite3::SQLException' do
-        expect { subject }.to raise_error SQLite3::SQLException
-      end
+
+      it { expect { subject }.to raise_error SQLite3::SQLException }
     end
   end
 
   describe 'cbrt' do
-    let(:val) { 27 }
-    subject do
-      db.execute("select cbrt(#{val})")[0][0]
-    end
+    let(:sql) { "select cbrt(#{val})" }
+
     context 'value is 27' do
       let(:val) { 27 }
-      it 'is 3' do
-        is_expected.to eq 3
-      end
+
+      it { is_expected.to eq 3 }
     end
     context 'value is -64' do
       let(:val) { -64 }
-      it 'is -4' do
-        is_expected.to eq(-4)
-      end
+
+      it { is_expected.to eq(-4) }
     end
     context 'value is null' do
       let(:val) { 'null' }
-      it 'is nil' do
-        is_expected.to be_nil
-      end
+
+      it { is_expected.to be_nil }
     end
     context 'value type is string' do
       let(:val) { "'STR'" }
-      it 'raise SQLite3::SQLException' do
-        expect { subject }.to raise_error SQLite3::SQLException
-      end
+
+      it { expect { subject }.to raise_error SQLite3::SQLException }
     end
   end
 end
