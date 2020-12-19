@@ -19,12 +19,12 @@ module SQLite3ExtendFunction
 
     # @return [Proc]
     def to_proc
-      @mod.method(:call)
+      ->(func, *argv) { func.result = @mod.call(*argv) }
     end
 
     # @return [Integer]
     def arity
-      to_proc.parameters.size - 1
+      @mod.method(:call).parameters.size
     end
   end
 end

@@ -76,11 +76,33 @@ And then execute:
 $ bundle
 ```
 
-## Include module
+## Enable extend functions
 
 ```ruby
 SQLite3::Database.include(SQLite3ExtendFunction)
 ```
+
+## Add extend function
+
+Extend function can be added by defining modules such as:
+
+```ruby
+module SQLite3ExtendFunction
+  module Functions
+    module FunctionName
+      class << self
+        def call(arg1)
+          # ...
+        rescue StandardError
+          raise SQLite3::SQLException, 'error message'
+        end
+      end
+    end
+  end
+end
+```
+
+Extend function name is "FunctionName" as the snake case.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

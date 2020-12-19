@@ -5,11 +5,12 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Div
     module Div
       class << self
-        # @return [void]
-        def call(func, y, x)
-          return if y.nil? || x.nil?
-
-          func.result = Float(y).div(Float(x))
+        # @param [Integer, Float] y
+        # @param [Integer, Float] x
+        # @return [Integer, Float]
+        # @raise [SQLite3::SQLException]
+        def call(y, x)
+          Float(y).div(Float(x)) unless y.nil? || x.nil?
         rescue ArgumentError
           raise SQLite3::SQLException, 'invalid input syntax for type numeric'
         end

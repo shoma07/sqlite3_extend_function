@@ -5,11 +5,11 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Degrees
     module Degrees
       class << self
-        # @return [void]
-        def call(func, dp)
-          return if dp.nil?
-
-          func.result = Float(dp) * 180 / Math::PI
+        # @param [Integer, Float] dp
+        # @return [Float]
+        # @raise [SQLite3::SQLException]
+        def call(dp)
+          Float(dp) * 180 / Math::PI unless dp.nil?
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end

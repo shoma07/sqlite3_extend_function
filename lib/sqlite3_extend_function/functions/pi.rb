@@ -5,9 +5,9 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Pi
     module Pi
       class << self
-        # @return [void]
-        def call(func)
-          func.result = Math::PI
+        # @return [Float]
+        def call
+          Math::PI
         end
       end
     end

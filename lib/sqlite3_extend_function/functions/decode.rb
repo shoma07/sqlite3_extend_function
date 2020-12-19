@@ -5,14 +5,20 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Decode
     module Decode
       class << self
-        # @return [void]
-        def call(func, data, format)
-          return if data.nil?
+        # @todo implement escape
+        #
+        # @param [String] str
+        # @param [String] format
+        # @return [String]
+        # @raise [SQLite3::SQLException]
+        def call(str, format)
+          return if str.nil?
+          raise ArgumentError unless str.is_a?(String)
 
-          func.result = (data.is_a?(String) && (raise ArgumentError)) ||
-                        (format == 'base64' && Base64.decode64(data)) ||
-                        (format == 'hex' && data.scan(/.{2}/).map(&:hex).map(&:chr).join) ||
-                        (raise  ArgumentError)
+          return Base64.decode64(str) if format == 'base64'
+          return str.scan(/.{2}/).map { |s| s.hex.chr }.join if format == 'hex'
+
+          raise  ArgumentError
         rescue ArgumentError
           raise SQLite3::SQLException, 'No function matches the given name and argument types. ' \
             'You might need to add explicit type casts.'

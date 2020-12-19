@@ -5,11 +5,11 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Floor
     module Floor
       class << self
-        # @return [void]
-        def call(func, dp)
-          return if dp.nil?
-
-          func.result = Float(dp).floor.to_i
+        # @param [Integer, Float] dp
+        # @return [Integer]
+        # @raise [SQLite3::SQLException]
+        def call(dp)
+          Float(dp).floor.to_i unless dp.nil?
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end

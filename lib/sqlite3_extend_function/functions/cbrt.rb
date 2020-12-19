@@ -5,12 +5,14 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Cbrt
     module Cbrt
       class << self
-        # @return [void]
-        def call(func, dp)
+        # @param [Integer, Float] dp
+        # @return [Integer, Float]
+        # @raise [SQLite3::SQLException]
+        def call(dp)
           return if dp.nil?
 
-          result = Math.cbrt(Kernel.Float(dp))
-          func.result = result.to_i == result ? result.to_i : result
+          result = Math.cbrt(Float(dp))
+          result.to_i == result ? result.to_i : result
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end

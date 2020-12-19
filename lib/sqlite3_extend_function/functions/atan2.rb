@@ -5,9 +5,12 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Atan2
     module Atan2
       class << self
-        # @return [void]
-        def call(func, y, x)
-          func.result = Math.atan2(Float(y), Float(x))
+        # @param [Integer, Float] y
+        # @param [Integer, Float] x
+        # @return [Float]
+        # @raise [SQLite3::SQLException]
+        def call(y, x)
+          Math.atan2(Float(y), Float(x))
         rescue ArgumentError
           raise SQLite3::SQLException, 'invalid input syntax for type double precision'
         end

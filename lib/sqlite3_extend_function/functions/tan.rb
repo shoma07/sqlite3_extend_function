@@ -5,9 +5,11 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Tan
     module Tan
       class << self
-        # @return [void]
-        def call(func, x)
-          func.result = Math.tan(Float(x))
+        # @param [Float, Integer] x
+        # @return [Float]
+        # @raise [SQLite3::SQLException]
+        def call(x)
+          Math.tan(Float(x))
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: #{x}"
         end

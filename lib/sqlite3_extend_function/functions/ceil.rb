@@ -5,11 +5,13 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Ceil
     module Ceil
       class << self
-        # @return [void]
-        def call(func, dp)
+        # @param [Integer, Float] dp
+        # @return [Integer]
+        # @raise [SQLite3::SQLException]
+        def call(dp)
           return if dp.nil?
 
-          func.result = Float(dp).ceil.to_i
+          Float(dp).ceil.to_i
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end

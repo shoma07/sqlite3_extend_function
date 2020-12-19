@@ -5,9 +5,12 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Btrim
     module Btrim
       class << self
-        # @return [void]
-        def call(func, text, chrs = '')
-          func.result = text.sub(/\A[#{chrs}]*/, '').sub(/[#{chrs}]*\z/, '')
+        # @param [String] text
+        # @param [String] chars
+        # @return [String]
+        # @raise [SQLite3::SQLException]
+        def call(text, chrs = '')
+          text.sub(/\A[#{chrs}]*/, '').sub(/[#{chrs}]*\z/, '')
         rescue ArgumentError
           raise SQLite3::SQLException, 'No function matches the given name and argument types. ' \
             'You might need to add explicit type casts.'

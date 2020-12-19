@@ -5,12 +5,14 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Sqrt
     module Sqrt
       class << self
-        # @return [void]
-        def call(func, dp)
+        # @param [Integer, Float] dp
+        # @return [Integer, Float]
+        # @raise [SQLite3::SQLException]
+        def call(dp)
           return if dp.nil?
 
           result = Math.sqrt(Float(dp))
-          func.result = result.to_i == result ? result.to_i : result
+          result.to_i == result ? result.to_i : result
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end

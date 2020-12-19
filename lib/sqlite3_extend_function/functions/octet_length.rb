@@ -5,9 +5,11 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::OctetLength
     module OctetLength
       class << self
-        # @return [void]
-        def call(func, str)
-          func.result = str.bytesize
+        # @param [String] str
+        # @return [Integer]
+        # @raise [SQLite3::SQLException]
+        def call(str)
+          str.bytesize
         rescue ArgumentError
           raise SQLite3::SQLException, 'No function matches the given name and argument types. ' \
             'You might need to add explicit type casts.'

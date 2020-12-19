@@ -5,9 +5,12 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Mod
     module Mod
       class << self
-        # @return [void]
-        def call(func, y, x = nil)
-          func.result = Float(y).modulo(Float(x)).to_i
+        # @param [Integer, Float] y
+        # @param [Integer, Float] x
+        # @return [Integer]
+        # @raise [SQLite3::SQLException]
+        def call(y, x = nil)
+          Float(y).modulo(Float(x)).to_i
         rescue ArgumentError
           raise SQLite3::SQLException,
                 'Could not choose a best candidate function. You might need to add explicit type casts.'

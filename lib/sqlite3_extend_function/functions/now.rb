@@ -5,9 +5,9 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Now
     module Now
       class << self
-        # @return [void]
-        def call(func)
-          func.result = Time.now.strftime('%Y-%m-%d %H:%M:%S.%6N%:z')
+        # @return [String]
+        def call
+          Time.now.strftime('%Y-%m-%d %H:%M:%S.%6N%:z')
         end
       end
     end
