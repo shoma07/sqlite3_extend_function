@@ -65,10 +65,10 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'sqlite3_extend_function', '~> 0.3'
 
-# master branch
+# main branch
 gem 'sqlite3_extend_function',
     git: 'https://github.com/shoma07/sqlite3_extend_function.git',
-    branch: 'master'
+    branch: 'main'
 ```
 
 And then execute:
