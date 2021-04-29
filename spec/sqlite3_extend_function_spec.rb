@@ -10,19 +10,19 @@ RSpec.describe SQLite3ExtendFunction do
   describe 'acos' do
     let(:sql) { "select acos(#{val})" }
 
-    context 'value is 0' do
+    context 'when value is 0' do
       let(:val) { 0 }
 
       it { is_expected.to eq 1.5707963267948966 }
     end
 
-    context 'value is 1' do
+    context 'when value is 1' do
       let(:val) { 1 }
 
       it { is_expected.to eq 0 }
     end
 
-    context 'value is -1' do
+    context 'when value is -1' do
       let(:val) { -1 }
 
       it { is_expected.to eq 3.141592653589793 }
@@ -32,22 +32,25 @@ RSpec.describe SQLite3ExtendFunction do
   describe 'ceil' do
     let(:sql) { "select ceil(#{val})" }
 
-    context 'value is 0.01' do
+    context 'when value is 0.01' do
       let(:val) { 0.01 }
 
       it { is_expected.to eq 1 }
     end
-    context 'value is -0.01' do
+
+    context 'when value is -0.01' do
       let(:val) { -0.01 }
 
       it { is_expected.to eq 0 }
     end
-    context 'value is null' do
+
+    context 'when value is null' do
       let(:val) { 'null' }
 
       it { is_expected.to be_nil }
     end
-    context 'value type is string' do
+
+    context 'when value type is string' do
       let(:val) { "'STR'" }
 
       it { expect { subject }.to raise_error SQLite3::SQLException }
@@ -57,22 +60,25 @@ RSpec.describe SQLite3ExtendFunction do
   describe 'floor' do
     let(:sql) { "select floor(#{val})" }
 
-    context 'value is 0.01' do
+    context 'when value is 0.01' do
       let(:val) { 0.01 }
 
       it { is_expected.to eq 0 }
     end
-    context 'value is -0.01' do
+
+    context 'when value is -0.01' do
       let(:val) { -0.01 }
 
       it { is_expected.to eq(-1) }
     end
-    context 'value is null' do
+
+    context 'when value is null' do
       let(:val) { 'null' }
 
       it { is_expected.to be_nil }
     end
-    context 'value type is string' do
+
+    context 'when value type is string' do
       let(:val) { "'STR'" }
 
       it { expect { subject }.to raise_error SQLite3::SQLException }
@@ -82,22 +88,25 @@ RSpec.describe SQLite3ExtendFunction do
   describe 'cbrt' do
     let(:sql) { "select cbrt(#{val})" }
 
-    context 'value is 27' do
+    context 'when value is 27' do
       let(:val) { 27 }
 
       it { is_expected.to eq 3 }
     end
-    context 'value is -64' do
+
+    context 'when value is -64' do
       let(:val) { -64 }
 
       it { is_expected.to eq(-4) }
     end
-    context 'value is null' do
+
+    context 'when value is null' do
       let(:val) { 'null' }
 
       it { is_expected.to be_nil }
     end
-    context 'value type is string' do
+
+    context 'when value type is string' do
       let(:val) { "'STR'" }
 
       it { expect { subject }.to raise_error SQLite3::SQLException }

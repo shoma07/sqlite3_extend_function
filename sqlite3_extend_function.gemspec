@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors     = %w[shoma07]
   spec.email       = %w[23730734+shoma07@users.noreply.github.com]
   spec.homepage    = 'https://github.com/shoma07/sqlite3_extend_function'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
   spec.summary     = 'Add some user-defined functions to SQL when using SQLie3.'
   spec.description = 'Add some user-defined functions to SQL when using SQLie3.'
   spec.license     = 'MIT'
