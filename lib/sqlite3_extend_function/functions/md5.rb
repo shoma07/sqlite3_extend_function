@@ -9,10 +9,10 @@ module SQLite3ExtendFunction
         # @return [String]
         # @raise [SQLite3::SQLException]
         def call(str)
-          Digest::MD5.hexdigest(str) unless str.nil?
+          str&.then { |param| Digest::MD5.hexdigest(param) }
         rescue StandardError
           raise SQLite3::SQLException, 'No function matches the given name and argument types. ' \
-            'You might need to add explicit type casts.'
+                                       'You might need to add explicit type casts.'
         end
       end
     end

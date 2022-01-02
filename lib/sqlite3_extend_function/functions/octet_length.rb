@@ -12,7 +12,7 @@ module SQLite3ExtendFunction
           str.bytesize
         rescue ArgumentError
           raise SQLite3::SQLException, 'No function matches the given name and argument types. ' \
-            'You might need to add explicit type casts.'
+                                       'You might need to add explicit type casts.'
         end
       end
     end

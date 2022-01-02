@@ -9,10 +9,8 @@ module SQLite3ExtendFunction
         # @return [Integer, Float]
         # @raise [SQLite3::SQLException]
         def call(dp)
-          return if dp.nil?
-
-          result = Float(dp) * Math::PI / 180
-          result.to_i == result ? result.to_i : result
+          dp&.then { |param| Float(param) * Math::PI / 180 }
+            &.then { |param| param.to_i == param ? param.to_i : param }
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end
