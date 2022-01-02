@@ -10,7 +10,7 @@ module SQLite3ExtendFunction
         # @return [Integer]
         # @raise [SQLite3::SQLException]
         def call(y, x = nil)
-          Float(y).modulo(Float(x)).to_i
+          Integer(Float(y).modulo(Float(x)))
         rescue ArgumentError
           raise SQLite3::SQLException,
                 'Could not choose a best candidate function. You might need to add explicit type casts.'

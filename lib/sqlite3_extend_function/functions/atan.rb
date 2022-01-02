@@ -5,7 +5,7 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::Atan
     module Atan
       class << self
-        # @param [Integer, Float] x
+        # @param x [Integer, Float]
         # @return [Float]
         # @raise [SQLite3::SQLException]
         def call(x)

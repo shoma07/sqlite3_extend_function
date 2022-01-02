@@ -1,9 +1,12 @@
 require:
+  - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
   NewCops: enable
+
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
@@ -12,5 +15,3 @@ Naming/MethodParameterName:
 RSpec/FilePath:
   Exclude:
     - spec/sqlite3_extend_function_spec.rb
-RSpec/NamedSubject:
-  Enabled: false

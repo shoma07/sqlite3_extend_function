@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe SQLite3ExtendFunction do
-  subject { db.execute(sql)[0][0] }
+  subject(:result) { db.execute(sql)[0][0] }
 
   let(:db) { SQLite3::Database.new(':memory:') }
 
@@ -53,7 +53,7 @@ RSpec.describe SQLite3ExtendFunction do
     context 'when value type is string' do
       let(:val) { "'STR'" }
 
-      it { expect { subject }.to raise_error SQLite3::SQLException }
+      it { expect { result }.to raise_error SQLite3::SQLException }
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe SQLite3ExtendFunction do
     context 'when value type is string' do
       let(:val) { "'STR'" }
 
-      it { expect { subject }.to raise_error SQLite3::SQLException }
+      it { expect { result }.to raise_error SQLite3::SQLException }
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe SQLite3ExtendFunction do
     context 'when value type is string' do
       let(:val) { "'STR'" }
 
-      it { expect { subject }.to raise_error SQLite3::SQLException }
+      it { expect { result }.to raise_error SQLite3::SQLException }
     end
   end
 end

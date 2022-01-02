@@ -5,7 +5,7 @@ module SQLite3ExtendFunction
     # SQLite3ExtendFunction::Functions::BitLength
     module BitLength
       class << self
-        # @param [String] str
+        # @param str [String]
         # @return [Integer]
         # @raise [SQLite3::SQLException]
         def call(str)

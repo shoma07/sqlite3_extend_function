@@ -8,9 +8,7 @@ module SQLite3ExtendFunction
     class << self
       # @return [void]
       def each
-        constants.each do |const|
-          yield SQLite3ExtendFunction::Function.new(const_get(const))
-        end
+        constants.each { |const| yield(SQLite3ExtendFunction::Function.new(const_get(const))) }
       end
     end
   end

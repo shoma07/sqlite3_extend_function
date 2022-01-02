@@ -8,11 +8,9 @@ module SQLite3ExtendFunction
         # @param [Integer, Float] dp
         # @return [Integer]
         # @raise [SQLite3::SQLException]
-        def call(dp)
-          return if dp.nil?
-
-          value = Float(dp)
-          (value.zero? && 0) || (value.positive? && 1) || -1
+        def call(dp) # rubocop:todo Metrics/CyclomaticComplexity
+          dp&.then { |param| Float(param) }
+            &.then { |param| (param.zero? && 0) || (param.positive? && 1) || -1 }
         rescue ArgumentError
           raise SQLite3::SQLException, "invalid input syntax for type double precision: \"#{dp}\""
         end
